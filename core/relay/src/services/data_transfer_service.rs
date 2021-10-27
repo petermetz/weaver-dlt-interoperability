@@ -1,3 +1,5 @@
+extern crate relaywasm;
+
 // Internal generated modules
 use crate::pb::common::ack::{ack, Ack};
 use crate::pb::common::query::Query;
@@ -42,6 +44,7 @@ impl DataTransfer for DataTransferService {
             request.remote_addr(),
             request
         );
+        relaywasm::greet();
         let query = request.into_inner().clone();
         let request_id = query.request_id.to_string();
         let conf = self.config_lock.read().await;
